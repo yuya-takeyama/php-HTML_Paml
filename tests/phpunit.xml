@@ -1,0 +1,12 @@
+<phpunit colors="true">
+  <testsuites>
+    <testsuite name="src">
+      <directory>./HTML</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+      <directory>../src/HTML</directory>
+    </whitelist>
+  </filter>
+</phpunit>
