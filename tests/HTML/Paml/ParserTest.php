@@ -41,4 +41,15 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             $this->parser->parse(array('div', 'Foo'))
         );
     }
+
+    /**
+     * @test
+     */
+    public function parse_creates_nested_tag_from_nested_array()
+    {
+        $this->assertSame(
+            '<div><p>Foo</p></div>',
+            $this->parser->parse(array('div', array('p', 'Foo')))
+        );
+    }
 }

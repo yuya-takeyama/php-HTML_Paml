@@ -17,9 +17,32 @@ class Parser
         if (count($ary) === 1) {
             return "<{$ary[0]} />";
         } else {
-            $tag = $ary[0];
-            $str = $ary[1];
-            return "<{$tag}>{$str}</{$tag}>";
+            return $this->_parseElement($ary);
+        }
+    }
+
+    protected function _parseElement($ary)
+    {
+        $tag   = $ary[0];
+        if ($this->_isNumericArray($ary[1])) {
+            $inner = $this->_parseElement($ary[1]);
+        } else {
+            $inner = $ary[1];
+        }
+        return "<{$tag}>{$inner}</{$tag}>";
+    }
+
+    protected function _isNumericArray($input)
+    {
+        if (is_array($input)) {
+            foreach ($input as $key => $value) {
+                if (! is_int($key)) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 }
