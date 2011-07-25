@@ -29,8 +29,9 @@ class Parser
         if (is_array($paml)) {
             $factors = Util::extractSymbol($paml[0]);
             $element = new Element($factors);
-            if (isset($paml[1])) {
-                $element->appendChild($this->parse($paml[1]));
+            $count = count($paml);
+            for ($i = 1; $i < $count; $i++) {
+                $element->appendChild($this->parse($paml[$i]));
             }
             return $element;
         } else if (is_string($paml)) {
