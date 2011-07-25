@@ -33,18 +33,4 @@ class Parser
         }
         return "<{$tag}>{$inner}</{$tag}>";
     }
-
-    protected function _isNumericArray($input)
-    {
-        if (is_array($input)) {
-            foreach ($input as $key => $value) {
-                if (! is_int($key)) {
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
