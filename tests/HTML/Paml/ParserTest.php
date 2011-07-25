@@ -27,7 +27,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             '<div />',
-            $this->parser->parse(array('div'))
+            $this->parser->parse(array('div'))->toString()
         );
     }
 
@@ -38,7 +38,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             '<div>Foo</div>',
-            $this->parser->parse(array('div', 'Foo'))
+            $this->parser->parse(array('div', 'Foo'))->toString()
         );
     }
 
@@ -49,7 +49,18 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(
             '<div><p>Foo</p></div>',
-            $this->parser->parse(array('div', array('p', 'Foo')))
+            $this->parser->parse(array('div', array('p', 'Foo')))->toString()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function parse_creates_tag_which_has_id_from_sharp_sign()
+    {
+        $this->assertSame(
+            '<div id="bar">Foo</div>',
+            $this->parser->parse(array('div#bar', 'Foo'))->toString()
         );
     }
 }

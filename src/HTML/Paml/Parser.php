@@ -7,6 +7,8 @@
 
 namespace HTML\Paml;
 
+use HTML\Paml\Element;
+use HTML\Paml\TextNode;
 use HTML\Paml\Util;
 
 /**
@@ -22,29 +24,17 @@ class Parser
      * @param  array $ary Paml formatted array.
      * @return string     Output HTML.
      */
-    public function parse(array $ary)
+    public function parse($paml)
     {
-        if (count($ary) === 1) {
-            return "<{$ary[0]} />";
-        } else {
-            return $this->_parseElement($ary);
+        if (is_array($paml)) {
+            $factors = Util::extractSymbol($paml[0]);
+            $element = new Element($factors);
+            if (isset($paml[1])) {
+                $element->appendChild($this->parse($paml[1]));
+            }
+            return $element;
+        } else if (is_string($paml)) {
+            return new TextNode($paml);
         }
-    }
-
-    /**
-     * Parses Paml element recursively.
-     *
-     * @param  array $ary
-     * @return string
-     */
-    protected function _parseElement($ary)
-    {
-        $tag   = $ary[0];
-        if (Util::isNumericArray($ary[1])) {
-            $inner = $this->_parseElement($ary[1]);
-        } else {
-            $inner = $ary[1];
-        }
-        return "<{$tag}>{$inner}</{$tag}>";
     }
 }
