@@ -7,6 +7,8 @@
 
 namespace HTML\Paml;
 
+use HTML\Paml\Util;
+
 /**
  * Paml parser.
  */
@@ -24,7 +26,7 @@ class Parser
     protected function _parseElement($ary)
     {
         $tag   = $ary[0];
-        if ($this->_isNumericArray($ary[1])) {
+        if (Util::isNumericArray($ary[1])) {
             $inner = $this->_parseElement($ary[1]);
         } else {
             $inner = $ary[1];
