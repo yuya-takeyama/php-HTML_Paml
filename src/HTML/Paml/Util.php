@@ -1,6 +1,6 @@
 <?php
 /**
- * Paml: PHP array markkup language.
+ * Paml: PHP array markup language.
  *
  * @author Yuya Takeyama
  */
