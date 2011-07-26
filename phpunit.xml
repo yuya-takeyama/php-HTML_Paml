@@ -1,12 +1,12 @@
-<phpunit colors="true">
+<phpunit colors="true" bootstrap="tests/bootstrap.php">
   <testsuites>
     <testsuite name="src">
-      <directory>./HTML</directory>
+      <directory>./tests</directory>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist>
-      <directory>../src/HTML</directory>
+      <directory>./src</directory>
     </whitelist>
   </filter>
 </phpunit>

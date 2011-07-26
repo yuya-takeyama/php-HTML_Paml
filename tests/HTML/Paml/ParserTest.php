@@ -1,8 +1,6 @@
 <?php
 namespace HTML\Paml;
 
-require_once __DIR__ . '/../../test_helper.php';
-
 use HTML\Paml\Parser;
 
 /**
