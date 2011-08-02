@@ -43,6 +43,14 @@ class UtilTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function isNumericArray_should_be_false_if_the_argument_is_not_an_array()
+    {
+        $this->assertFalse(Util::isNumericArray(NULL));
+    }
+
+    /**
+     * @test
+     */
     public function extractSymbol_should_be_array_contains_only_array_if_the_symbol_does_not_contains_any_sharp_or_dots()
     {
         $this->assertSame(
