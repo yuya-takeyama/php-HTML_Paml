@@ -58,6 +58,40 @@ class Util
     }
 
     /**
+     * Extracts numeric array from the argument.
+     *
+     * @param  array $input
+     * @return array
+     */
+    public static function extractNumericArray($input)
+    {
+        $result = array();
+        foreach ($input as $key => $value) {
+            if (is_int($key)) {
+                $result[$key] = $value;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Extracts hash from the argument.
+     *
+     * @param  array $input
+     * @return array
+     */
+    public static function extractHash($input)
+    {
+        $result = array();
+        foreach ($input as $key => $value) {
+            if (! is_int($key)) {
+                $result[$key] = $value;
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Escapes string as HTML.
      *
      * @return string

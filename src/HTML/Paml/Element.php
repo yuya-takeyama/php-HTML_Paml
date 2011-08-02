@@ -67,6 +67,17 @@ class Element implements NodeInterface
     }
 
     /**
+     * Sets the attribute.
+     *
+     * @param  string $key   Attribute name.
+     * @param  string $value Attribute value.
+     */
+    public function setAttribute($key, $value)
+    {
+        $this->_attributes[$key] = $value;
+    }
+
+    /**
      * Gets the attributes as hash.
      *
      * @return array

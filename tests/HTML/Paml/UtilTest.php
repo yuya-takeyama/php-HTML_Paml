@@ -113,4 +113,64 @@ class UtilTest extends \PHPUnit_Framework_TestCase
             Util::extractSymbol('#hoge.foo.bar.baz')
         );
     }
+
+    /**
+     * @test
+     */
+    public function extractNumericArray_should_return_the_argument_if_it_is_numeric_array()
+    {
+        $numericArray = array('Foo', 'Bar', 'Baz');
+        $this->assertSame($numericArray, Util::extractNumericArray($numericArray));
+    }
+
+    /**
+     * @test
+     */
+    public function extractNumericArray_should_return_empty_array_if_the_argument_is_hash()
+    {
+        $hash = array('foo' => 'bar', 'hoge' => 'piyo');
+        $this->assertSame(array(), Util::extractNumericArray($hash));
+    }
+
+    /**
+     * @test
+     */
+    public function extractNumericArray_should_return_numeric_array_extracted_from_the_argument()
+    {
+        $input = array('Foo', 'Bar', 'Baz', 'hoge' => 'piyo', 'fuga' => 'hage');
+        $this->assertSame(
+            array('Foo', 'Bar', 'Baz'),
+            Util::extractNumericArray($input)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function extractHash_should_return_the_argument_if_it_is_hash()
+    {
+        $hash = array('foo' => 'bar', 'hoge' => 'piyo');
+        $this->assertSame($hash, Util::extractHash($hash));
+    }
+
+    /**
+     * @test
+     */
+    public function extractHash_should_return_empty_array_if_the_argument_is_numeric_array()
+    {
+        $numericArray = array('Foo', 'Bar', 'Baz');
+        $this->assertSame(array(), Util::extractHash($numericArray));
+    }
+
+    /**
+     * @test
+     */
+    public function extractHash_should_return_hash_extracted_from_the_argument()
+    {
+        $input = array('Foo', 'Bar', 'Baz', 'hoge' => 'piyo', 'fuga' => 'hage');
+        $this->assertSame(
+            array('hoge' => 'piyo', 'fuga' => 'hage'),
+            Util::extractHash($input)
+        );
+    }
 }

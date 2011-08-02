@@ -28,11 +28,17 @@ class Parser
     public function parse($paml)
     {
         if (is_array($paml)) {
-            $factors = Util::extractSymbol($paml[0]);
+            $arr  = Util::extractNumericArray($paml);
+            $hash = Util::extractHash($paml);
+
+            $factors = Util::extractSymbol($arr[0]);
             $element = new Element($factors);
-            $count = count($paml);
+            $count = count($arr);
             for ($i = 1; $i < $count; $i++) {
                 $element->appendChild($this->parse($paml[$i]));
+            }
+            foreach ($hash as $key => $value) {
+                $element->setAttribute($key, $value);
             }
             return $element;
         } else if (is_string($paml)) {

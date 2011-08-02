@@ -91,6 +91,22 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function parse_should_parse_array_mixed_with_hash()
+    {
+        $this->assertSameAsString(
+            '<div id="foo" class="bar">Hoge</div>',
+            $this->parser->parse(array(
+                'div',
+                'Hoge',
+                'id'    => 'foo',
+                'class' => 'bar',
+            ))
+        );
+    }
+
+    /**
+     * @test
      * @expectedException HTML\Paml\Exception\ParseException
      */
     public function parse_should_throw_ParseException_if_the_argument_is_not_array_or_string()
