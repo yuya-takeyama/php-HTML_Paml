@@ -51,6 +51,6 @@ class TextNode implements NodeInterface
      */
     public function __toString()
     {
-        return Util::escape($this->_text);
+        return $this->_text;
     }
 }
