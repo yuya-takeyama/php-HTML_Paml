@@ -43,6 +43,17 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function parse_should_not_escape_its_inner_text_as_html()
+    {
+        $this->assertSame(
+            '<div>Foo<br />Bar</div>',
+            $this->parser->parse(array('div', 'Foo<br />Bar'))->toString()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function parse_creates_nested_tag_from_nested_array()
     {
         $this->assertSame(
@@ -76,5 +87,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
                     array('li', 'Baz')
             ))->toString()
         );
+    }
+
+    /**
+     * @test
+     * @expectedException HTML\Paml\Exception\ParseException
+     */
+    public function parse_should_throw_ParseException_if_the_argument_is_not_array_or_string()
+    {
+        $this->parser->parse(NULL);
     }
 }
