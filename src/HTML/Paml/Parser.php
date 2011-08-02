@@ -10,6 +10,7 @@ namespace HTML\Paml;
 use HTML\Paml\Element;
 use HTML\Paml\TextNode;
 use HTML\Paml\Util;
+use HTML\Paml\Exception\ParseException;
 
 /**
  * Paml parser.
@@ -37,5 +38,6 @@ class Parser
         } else if (is_string($paml)) {
             return new TextNode($paml);
         }
+        throw new ParseException;
     }
 }
