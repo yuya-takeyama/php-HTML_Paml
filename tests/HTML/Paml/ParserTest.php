@@ -23,9 +23,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_creates_an_empty_tag_from_array_with_1_element()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<div />',
-            $this->parser->parse(array('div'))->toString()
+            $this->parser->parse(array('div'))
         );
     }
 
@@ -34,9 +34,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_creates_a_tag_contains_string_from_array_with_2_elements()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<div>Foo</div>',
-            $this->parser->parse(array('div', 'Foo'))->toString()
+            $this->parser->parse(array('div', 'Foo'))
         );
     }
 
@@ -45,9 +45,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_should_not_escape_its_inner_text_as_html()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<div>Foo<br />Bar</div>',
-            $this->parser->parse(array('div', 'Foo<br />Bar'))->toString()
+            $this->parser->parse(array('div', 'Foo<br />Bar'))
         );
     }
 
@@ -56,9 +56,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_creates_nested_tag_from_nested_array()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<div><p>Foo</p></div>',
-            $this->parser->parse(array('div', array('p', 'Foo')))->toString()
+            $this->parser->parse(array('div', array('p', 'Foo')))
         );
     }
 
@@ -67,9 +67,9 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_creates_tag_which_has_id_from_sharp_sign()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<div id="bar">Foo</div>',
-            $this->parser->parse(array('div#bar', 'Foo'))->toString()
+            $this->parser->parse(array('div#bar', 'Foo'))
         );
     }
 
@@ -78,14 +78,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
      */
     public function parse_creates_tag_which_has_many_children_if_it_has_many_arrays_as_child()
     {
-        $this->assertSame(
+        $this->assertSameAsString(
             '<ul><li>Foo</li><li>Bar</li><li>Baz</li></ul>',
             $this->parser->parse(array(
                 'ul',
                     array('li', 'Foo'),
                     array('li', 'Bar'),
                     array('li', 'Baz')
-            ))->toString()
+            ))
         );
     }
 
@@ -96,5 +96,32 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     public function parse_should_throw_ParseException_if_the_argument_is_not_array_or_string()
     {
         $this->parser->parse(NULL);
+    }
+
+    /**
+     * Assertion method to compare a string with an object has __toString() method.
+     *
+     * @param  string $expected Expected string.
+     * @param  object $actual   Actual object which has __toStrin() method.
+     * @param  string $message  Assertion message.
+     */
+    public function assertSameAsString()
+    {
+        $args = func_get_args();
+        $args[1] = $this->_stringify($args[1]);
+        call_user_func_array(array($this, 'assertSame'), $args);
+    }
+
+    /**
+     * Stringify object.
+     *
+     * @param  object $obj
+     * @return string
+     */
+    protected function _stringify($obj)
+    {
+        if (is_object($obj) && method_exists($obj, '__toString')) {
+            return $obj->__toString();
+        }
     }
 }
