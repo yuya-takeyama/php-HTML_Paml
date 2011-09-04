@@ -32,7 +32,7 @@ while (true) {
     catch (ParseException $e) {
         echo PHP_EOL, "ParseException: Unexpected Paml structure is specified.", PHP_EOL;
     }
-    catch (\Exception) {
+    catch (\Exception $e) {
         echo PHP_EOL, "Exception: Unexpected error has occured.", PHP_EOL;
     }
 }
