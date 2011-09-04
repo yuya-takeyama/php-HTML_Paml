@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Paml converter.
+ *
+ * @author Yuya Takeyama
+ */
+
+set_include_path(__DIR__ . '/../src' . PATH_SEPARATOR . get_include_path());
+
+require_once 'HTML/Paml.php';
+require_once 'XML/Beautifier.php';
+
+use \HTML\Paml\Loader;
+use \HTML\Paml\Exception\EvalException;
+use \HTML\Paml\Exception\ParseException;
+
+$loader = new Loader;
+$formatter = new XML_Beautifier([
+    'indent' => '  ',
+]);
+
+echo $formatter->formatString($loader->fetch($argv[1]));
