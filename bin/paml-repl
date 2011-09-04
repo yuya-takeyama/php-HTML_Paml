@@ -20,6 +20,9 @@ $formatter = new XML_Beautifier([
     'indent' => '  ',
 ]);
 
+echo "Welcome to REPL for Paml!", PHP_EOL,
+     "Input your Paml code and press Ctrl+D to evaluate it.", PHP_EOL, PHP_EOL;
+
 while (true) {
     $code = file_get_contents('php://stdin');
     try {
