@@ -14,6 +14,7 @@ require_once __DIR__ . '/Paml/Parser.php';
 require_once __DIR__ . '/Paml/Util.php';
 require_once __DIR__ . '/Paml/Exception.php';
 require_once __DIR__ . '/Paml/Exception/ParseException.php';
+require_once __DIR__ . '/Paml/Exception/EvalException.php';
 
 class Paml
 {

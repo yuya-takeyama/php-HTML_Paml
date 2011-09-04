@@ -11,6 +11,7 @@ use HTML\Paml\Element;
 use HTML\Paml\TextNode;
 use HTML\Paml\Util;
 use HTML\Paml\Exception\ParseException;
+use HTML\Paml\Exception\EvalException;
 
 /**
  * Paml parser.
@@ -45,5 +46,19 @@ class Parser
             return new TextNode($paml);
         }
         throw new ParseException;
+    }
+
+    /**
+     * Parses string as Paml.
+     *
+     * @param  string $pamlString
+     * @return HTML\Paml\Element
+     */
+    public function parseFromString($pamlString)
+    {
+        if (@eval("\$paml = {$pamlString};") === false) {
+            throw new EvalException;
+        }
+        return $this->parse($paml);
     }
 }
