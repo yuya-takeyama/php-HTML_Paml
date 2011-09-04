@@ -117,6 +117,17 @@ class UtilTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function extractSymbol_should_be_able_to_extract_h1_tag()
+    {
+        $this->assertSame(
+            array('tag' => 'h1', 'id' => 'hoge', 'class' => 'foo bar baz'),
+            Util::extractSymbol('h1#hoge.foo.bar.baz')
+        );
+    }
+
+    /**
+     * @test
+     */
     public function extractNumericArray_should_return_the_argument_if_it_is_numeric_array()
     {
         $numericArray = array('Foo', 'Bar', 'Baz');

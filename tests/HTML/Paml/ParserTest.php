@@ -76,6 +76,17 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function parse_should_althogh_be_valid_if_the_tag_is_h1()
+    {
+        $this->assertSameAsString(
+            '<h1 id="bar">Foo</h1>',
+            $this->parser->parse(array('h1#bar', 'Foo'))
+        );
+    }
+
+    /**
+     * @test
+     */
     public function parse_creates_tag_which_has_many_children_if_it_has_many_arrays_as_child()
     {
         $this->assertSameAsString(

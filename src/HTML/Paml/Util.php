@@ -42,7 +42,7 @@ class Util
      */
     public static function extractSymbol($symbol)
     {
-        preg_match('/^([a-z]+)?(?:#([a-z\-_]+))?(?:\.([a-z\-_\.]+))?$/i', $symbol, $matches);
+        preg_match('/^([a-z1-6]+)?(?:#([a-z\-_]+))?(?:\.([a-z\-_\.]+))?$/i', $symbol, $matches);
         if (isset($matches[1]) && strlen($matches[1]) > 0) {
             $result = array('tag' => $matches[1]);
         } else {
