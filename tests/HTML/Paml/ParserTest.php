@@ -115,6 +115,26 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function parseFromString_evaluates_string_and_parse_as_paml_formatted_array()
+    {
+        $this->assertSameAsString(
+            '<div />',
+            $this->parser->parseFromString('["div"]')
+        );
+    }
+
+    /**
+     * @test
+     * @expectedException HTML\Paml\Exception\EvalException
+     */
+    public function parseFromString_should_EvalException_if_the_string_is_unexpected()
+    {
+        $this->parser->parseFromString('["div');
+    }
+
+    /**
      * Assertion method to compare a string with an object has __toString() method.
      *
      * @param  string $expected Expected string.
